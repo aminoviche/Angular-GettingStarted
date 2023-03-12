@@ -11,3 +11,7 @@ bower_components
 bin
 obj
 packages
+/.idea/*
+/package-lock.json
+/APM-Start/package-lock.json
+/APM-Final/package-lock.json
