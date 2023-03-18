@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, Output, OnInit, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'pm-start',
@@ -9,6 +9,7 @@ export class StarComponent implements OnInit {
 
   @Input() rating = 0;
   cropWidth = 75;
+  @Output() ratingClicked = new EventEmitter();
 
   constructor() { }
 
@@ -19,5 +20,8 @@ export class StarComponent implements OnInit {
     this.cropWidth = this.rating * 75 / 5;
   }
 
+  onRatingClick() : void{
+    this.ratingClicked.emit(`The rating ${this.rating} was clicked!`);
+  }
 
 }
