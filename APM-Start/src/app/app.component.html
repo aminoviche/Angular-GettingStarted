@@ -3,7 +3,8 @@
     <a class='navbar-brand'></a>
     <ul class='nav nav-pills'>
     <li><a class='nav-link' [routerLink]="[ '/welcome' ]"  routerLinkActive="active">Home</a></li>
-    <li><a class='nav-link' routerLinkActive='active' routerLink='/products'>Product List</a></li>
+    <li><a class='nav-link' routerLinkActive='active' routerLink='/products' [routerLinkActiveOptions]="{exact: true}">Product List</a></li>
+    <li><a class='nav-link' routerLinkActive='active' routerLink='/products/0/edit' [routerLinkActiveOptions]="{exact: true}">Add new product</a></li>
   </ul>
   </nav>
 

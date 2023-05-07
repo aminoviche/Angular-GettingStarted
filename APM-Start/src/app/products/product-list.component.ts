@@ -1,13 +1,15 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { IProduct } from './product';
 import { ProductService } from './product.service';
 
 @Component({
   selector: 'pm-product-list',
-  templateUrl: './product-list.component.html',
+  templateUrl: './product-list.component_sort.html',
   styleUrls: ['./product-list.component.css']
 })
 export class ProductListComponent implements OnInit {
+  headers = ['Name', 'Product', 'Code', 'Available', 'Price', 'star rating'];
   pageTitle = 'Product List';
   filteredProducts: IProduct[] = [];
   products: IProduct[] = [];
@@ -16,7 +18,8 @@ export class ProductListComponent implements OnInit {
     showImage = false;
 
 
-  constructor(private productService: ProductService) { }
+  constructor(private productService: ProductService,
+    private router: Router) { }
 
   ngOnInit(): void {
   this.productService.getProducts().subscribe({
@@ -50,6 +53,17 @@ export class ProductListComponent implements OnInit {
 
   fireEvent(message: string):void{
     this.pageTitle = 'Product List' + message;
+  }
+
+  deleteProduct(id:number):void{
+    
+    this.productService.deleteProduct(id).subscribe({
+      next:()=> {
+        console.log("delete" + id);
+        this.router.navigate(["welcome"]);
+      },
+      error : err =>console.log("delete" + err)
+    })
   }
 
 }
