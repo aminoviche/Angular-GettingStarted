@@ -1,21 +1,15 @@
-# Test web app that returns the name of the host/pod/container servicing req
-FROM node:current-alpine
+FROM node:16-alpine AS build
 
-LABEL org.opencontainers.image.title="Hello Docker Learners!" \
-      org.opencontainers.image.description="Web server showing angular" \
-      org.opencontainers.image.authors="@aminoviche"
+WORKDIR /app
 
-# Create directory in container image for app code
-RUN mkdir -p /usr/src/app
+COPY package*.json ./
 
-# Copy app code (.) to /usr/src/app in container image
-COPY . /usr/src/app
-
-# Set working directory context
-WORKDIR /usr/src/app
-
-# Install dependencies from package.json
 RUN npm install
 
-# Command for container to execute
-ENTRYPOINT [ "npm start" ]
+COPY . .
+
+RUN npm run build
+
+EXPOSE 4200
+
+CMD ["npm", "start"]
