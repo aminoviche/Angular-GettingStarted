@@ -18,4 +18,4 @@ WORKDIR /usr/src/app
 RUN npm install
 
 # Command for container to execute
-ENTRYPOINT [ "ng serve" ]
+ENTRYPOINT [ "npm start" ]
